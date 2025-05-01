@@ -4,9 +4,9 @@ import io from "socket.io-client";
 
 const SocketContext = createContext();
 
-export const useSocketContext = () =>{
-    return useContext(SocketContext);
-}
+export const useSocketContext = () => {
+  return useContext(SocketContext);
+};
 
 export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
@@ -15,24 +15,22 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (authUser) {
-      const socket = io("http://localhost:5000",{
-        query:{
-            userId:authUser._id,
+      const socket = io("https://talklet.onrender.com", {
+        query: {
+          userId: authUser._id,
         },
       });
       setSocket(socket);
 
-      socket.on("getOnlineUsers",(users)=>{
+      socket.on("getOnlineUsers", (users) => {
         setOnlineUsers(users);
-      })
-
+      });
     } else {
-        if (socket) {
-            socket.close();
-            setSocket(null);
-        }
+      if (socket) {
+        socket.close();
+        setSocket(null);
+      }
     }
-    
   }, [authUser]);
 
   return (
