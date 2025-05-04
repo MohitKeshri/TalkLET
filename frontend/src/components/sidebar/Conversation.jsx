@@ -1,5 +1,6 @@
 import { useSocketContext } from "../../context/SocketContext";
 import useConversation from "../../zustand/useConversation";
+import selectedConversationRef from '../../utils/conversationRef';
 
 const Conversation = ({ conversation, lastIdx, emoji }) => {
   const { selectedConversation, setSelectedConversation } = useConversation();
@@ -16,6 +17,7 @@ const Conversation = ({ conversation, lastIdx, emoji }) => {
         }`}
         onClick={() => {
           setSelectedConversation(conversation);
+          selectedConversationRef.current = conversation;
         }}
       >
         <div className="relative">

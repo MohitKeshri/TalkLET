@@ -13,14 +13,14 @@ const useLogin = () => {
     setLoading(true);
 
     try {
-        console.log(username);
+        
         const res = await fetch("/api/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, password }),
         });
       const data = await res.json();
-      console.log(data)
+      
       if (data.error) {
         throw new Error(data.error);
       }
